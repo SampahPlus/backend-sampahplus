@@ -16,7 +16,7 @@ steps:
         '--timeout',
         '1000s',
         '--memory',
-        '2GB',
+        '2048MB',
         '--port',
         '8081',
         '--region',
