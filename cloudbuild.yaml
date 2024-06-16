@@ -20,7 +20,7 @@ steps:
         '--port',
         '8081',
         '--region',
-        'asia-southeast2',
+        'asia-east1',
         '--platform',
         'managed',
         '--allow-unauthenticated',
