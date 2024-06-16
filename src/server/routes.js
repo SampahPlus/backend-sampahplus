@@ -1,9 +1,10 @@
 const {
   postPredictHandler,
   getPredictHistoriesHandler,
-  getDataByIdSampah
+  getDataByIdSampah,
+  getDataUi
 } = require("../server/handler");
-const { getDataUi } = require("../services/dbServices");
+
 
 const routes = [
   {
