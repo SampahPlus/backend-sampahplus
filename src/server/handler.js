@@ -4,9 +4,9 @@ const InputError = require('../exceptions/InputError');
 const services = require('../services/dbServices');
 
 const postPredictHandler = async (request, h) => {
-  const { email } = request.payload;
+  const { email,image } = request.payload;
   const { model, classIndices } = request.server.app;
-  const image = request.payload.image;
+
 
   try {
     if (!image) {
