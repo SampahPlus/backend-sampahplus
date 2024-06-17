@@ -32,10 +32,11 @@ const postPredictHandler = async (request, h) => {
       throw new InputError('Prediction failed to map to any class.');
     }
 
+    const createdAt = new Date().toISOString();
     const results = await services.getDataByNamaSampah(predictedClass);
 
     // Insert history data
-    await services.postDataHistory(email, results.category.id_sampah);
+    await services.postDataHistory(email, results.category.id_sampah, createdAt);
 
     return h.response({
       status: 'success',

@@ -50,9 +50,9 @@ const getDataUi = () => {
     return queryDb(sql);
 };
 
-const postDataHistory = (email, id_sampah) => {
-    let sql = 'INSERT INTO `history`(`email`, `id_sampah` ) VALUES (?, ?)';
-    return queryDb(sql, [email, id_sampah]);
+const postDataHistory = (email, id_sampah, tanggal) => {
+    let sql = 'INSERT INTO `history`(`email`, `id_sampah`, `tanggal`) VALUES (?, ?, ?)';
+    return queryDb(sql, [email, id_sampah, tanggal]);
 };
 
 const getDataHistory = async (email) => {
