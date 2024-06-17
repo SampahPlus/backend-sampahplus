@@ -13,8 +13,7 @@ const loadAndPrepareImage = async (imageBuffer, targetSize = [150, 150]) => {
   } catch (error) {
     throw new InputError('An error occurred during image preprocessing: ' + error.message);
   }
-};
-
+}
 
 const makePrediction = async (model, tensor, classIndices) => {
   try {
@@ -23,10 +22,8 @@ const makePrediction = async (model, tensor, classIndices) => {
 
     const predictedIndex = predictionData.indexOf(Math.max(...predictionData));
 
-    
-    const predictedClass = Object.keys(classIndices)[predictedIndex];
+    const predictedClass = Object.keys(classIndices)[predictedIndex]
 
-    
     if (!predictedClass) {
       throw new InputError('Prediction failed to map to any class.');
     }

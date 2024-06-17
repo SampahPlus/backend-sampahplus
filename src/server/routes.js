@@ -3,8 +3,7 @@ const {
   getPredictHistoriesHandler,
   getDataByIdSampah,
   getDataUi
-} = require("../server/handler");
-
+} = require("../server/handler")
 
 const routes = [
   {
@@ -13,9 +12,11 @@ const routes = [
     handler: postPredictHandler,
     options: {
       payload: {
-        allow: "multipart/form-data",
-        multipart: true,
-        maxBytes: 1000 * 1000,
+        maxBytes: 10485760, // 10 MB
+        output: 'file',
+        parse: true,
+        multipart: true, // Ensure this is set to handle multipart
+        allow: 'multipart/form-data'
       },
     },
   },

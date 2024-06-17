@@ -1,13 +1,31 @@
+const fs = require('fs');
 const { loadAndPrepareImage, makePrediction } = require('../services/inferenceServices');
-const InputError = require('../exceptions/InputError'); 
-const services = require('../services/dbServices'); 
+const InputError = require('../exceptions/InputError');
+const services = require('../services/dbServices');
 
 const postPredictHandler = async (request, h) => {
-  const { image, email } = request.payload;
+  const { email } = request.payload;
   const { model, classIndices } = request.server.app;
+  const image = request.payload.image;
 
   try {
-    const tensor = await loadAndPrepareImage(image);
+    if (!image) {
+      throw new InputError('No image file provided');
+    }
+
+    // Log image details
+    console.log('Image details:', image);
+
+    // Check if the image path is defined
+    if (!image.path) {
+      throw new InputError('Image path is not defined');
+    }
+
+    // Read the image buffer
+    const imageBuffer = fs.readFileSync(image.path);
+
+    // Preprocess the image and make prediction
+    const tensor = await loadAndPrepareImage(imageBuffer);
     const { predictedClass } = await makePrediction(model, tensor, classIndices);
 
     if (!predictedClass) {
@@ -55,31 +73,30 @@ const getPredictHistoriesHandler = async (request, h) => {
 
 const getDataUi = async (request, h) => {
   try {
-      const results = await services.getDataUi();
-      return h.response(
-        {
-          status: 'success',
-          results
-        }).code(200);
+    const results = await services.getDataUi();
+    return h.response({
+      status: 'success',
+      results
+    }).code(200);
   } catch (err) {
-      console.error('Error executing query:', err);
-      return h.response('Error executing query').code(500);
+    console.error('Error executing query:', err);
+    return h.response('Error executing query').code(500);
   }
 };
 
 const getDataByIdSampah = async (request, h) => {
   try {
-      const results = await services.getDataByIdSampah(request.params.id_sampah);
-      if (!results.category) {
-          return h.response('Data not found').code(404);
-      }
-      return h.response({
-        status: 'success',
-        results}
-        ).code(200);
+    const results = await services.getDataByIdSampah(request.params.id_sampah);
+    if (!results.category) {
+      return h.response('Data not found').code(404);
+    }
+    return h.response({
+      status: 'success',
+      results
+    }).code(200);
   } catch (err) {
-      console.error('Error executing query:', err);
-      return h.response('Error executing query').code(500);
+    console.error('Error executing query:', err);
+    return h.response('Error executing query').code(500);
   }
 };
 

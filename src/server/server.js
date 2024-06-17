@@ -11,9 +11,7 @@ const classIndices = {
   'Plastik': 'classJ',
   'Sampah non olah': 'classK',
   'Sepatu': 'classL'
-};
-
-
+}
 const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
 const loadModel = require("../services/loadModel");
@@ -22,7 +20,7 @@ require("dotenv").config();
 
 const initServer = async () => {
   const server = Hapi.server({
-    port: process.env.PORT||8081,
+    port: process.env.PORT || 8081,
     host: "0.0.0.0",
     routes: {
       cors: {
