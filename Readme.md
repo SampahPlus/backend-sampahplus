@@ -1,6 +1,6 @@
 ## Acces Our Deployed API
 ```json
-[auth-api](https://backend-sampahplus-jsnkf64woq-de.a.run.app/)
+[backend-api](https://backend-sampahplus-jsnkf64woq-de.a.run.app/)
 ```
 
 ## Endpoint Description
